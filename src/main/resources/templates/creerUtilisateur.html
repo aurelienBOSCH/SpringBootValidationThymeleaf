@@ -13,6 +13,7 @@
         <div class="mb-3">
           <label for="nom" class="form-label">Nom</label> <br>
           <input type="text" class="form-control" id="nom" name="nom" th:field="*{nom}">
+          <p th:if="${#fields.hasErrors('nom')}">Nom error</p>
         </div>
 
         <br>
@@ -46,6 +47,7 @@
            <div class="mb-3">
             <label for="mdp" class="form-label">Mot de passe (8 caractères minimum)</label><br>
             <input type="password" minlength="8" required class="form-control" id="mdp" name="mdp" th:field="*{mdp}">
+            <p th:if="${#fields.hasErrors('mdp')}">Password error</p>
         </div>
 
     

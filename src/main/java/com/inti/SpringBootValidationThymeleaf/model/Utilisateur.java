@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,12 +32,22 @@ public class Utilisateur
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Min(1) @Max(1500)  private int id;
+	@NotEmpty(message = "saisir un nom")
 	private @NonNull String nom;
 	private String prenom;
 	@Column(unique = true)
 	private String username;
 	private String email;
+	@Size(min=4, message = "au moins 4 caractères")
+	@Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}$")
+//	    This regex will enforce these rules:
+	//
+//	        At least one upper case English letter
+//	        At least one lower case English letter
+//	        At least one digit
+//	        At least one special character
+//	        Minimum eight in length
 	private String mdp;
 	private String telephone;
 	
